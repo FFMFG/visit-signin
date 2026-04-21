@@ -7,8 +7,8 @@ export function History() {
 
   useEffect(() => {
     fetch("/api/admin/visits")
-      .then((r) => r.json())
-      .then((body: { visits: Visit[] }) => {
+      .then((r) => r.json() as Promise<{ visits: Visit[] }>)
+      .then((body) => {
         setVisits(body.visits);
         setLoading(false);
       });

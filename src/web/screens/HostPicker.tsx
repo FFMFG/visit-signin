@@ -14,13 +14,19 @@ export function HostPicker({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/hosts")
-      .then((r) => r.json())
-      .then((body: { hosts: Host[] }) => {
-        setAll(body.hosts);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    let cancelled = false;
+    (async () => {
+      try {
+        const resp = await fetch("/api/hosts");
+        const body = (await resp.json()) as { hosts: Host[] };
+        if (!cancelled) setAll(body.hosts);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const filtered = useMemo(() => {

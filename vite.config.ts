@@ -6,10 +6,14 @@ import devServer from "@hono/vite-dev-server";
 import adapter from "@hono/vite-dev-server/cloudflare";
 import { resolve } from "node:path";
 
-export default defineConfig(({ mode }) => {
-  const isWorker = mode === "worker";
+const sharedAliases = {
+  "@shared": resolve(__dirname, "src/shared"),
+  "@worker": resolve(__dirname, "src/worker"),
+  "@web": resolve(__dirname, "src/web"),
+};
 
-  if (isWorker) {
+export default defineConfig(({ mode }) => {
+  if (mode === "worker") {
     return {
       plugins: [
         build({
@@ -21,12 +25,7 @@ export default defineConfig(({ mode }) => {
           entry: "./src/worker/index.ts",
         }),
       ],
-      resolve: {
-        alias: {
-          "@shared": resolve(__dirname, "src/shared"),
-          "@worker": resolve(__dirname, "src/worker"),
-        },
-      },
+      resolve: { alias: sharedAliases },
     };
   }
 
@@ -41,12 +40,7 @@ export default defineConfig(({ mode }) => {
         input: resolve(__dirname, "src/web/index.html"),
       },
     },
-    resolve: {
-      alias: {
-        "@shared": resolve(__dirname, "src/shared"),
-        "@web": resolve(__dirname, "src/web"),
-      },
-    },
+    resolve: { alias: sharedAliases },
     server: {
       port: 5173,
       proxy: {

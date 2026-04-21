@@ -15,8 +15,8 @@ export function SignoutPick({
 
   useEffect(() => {
     fetch("/api/visits/open")
-      .then((r) => r.json())
-      .then((body: { visits: Visit[] }) => setOpen(body.visits));
+      .then((r) => r.json() as Promise<{ visits: Visit[] }>)
+      .then((body) => setOpen(body.visits));
   }, []);
 
   const filtered = open.filter((v) =>

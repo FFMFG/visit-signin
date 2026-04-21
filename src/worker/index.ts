@@ -29,7 +29,7 @@ app.get("/api/*", (c) => c.json({ error: "not_found" }, 404));
 export default {
   fetch: app.fetch,
 
-  async scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
+  async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
     // Runs daily at 00:07 UTC = ~18:07 MT (during DST). Cron adjusts naturally
     // twice a year — close enough; front desk reviews auto-closes in morning.
     ctx.waitUntil(runAutoSignout(env));

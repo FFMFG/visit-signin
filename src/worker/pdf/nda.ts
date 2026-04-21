@@ -1,6 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import usPersonTemplate from "../../../templates/us-person-nda.md?raw";
-import foreignNationalTemplate from "../../../templates/foreign-national-nda.md?raw";
+import usPersonTemplate from "../../../templates/us-person-nda.md";
+import foreignNationalTemplate from "../../../templates/foreign-national-nda.md";
 import type { Citizenship } from "@shared/types";
 import { renderTemplate } from "./template";
 

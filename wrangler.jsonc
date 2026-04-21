@@ -5,6 +5,10 @@
   "compatibility_date": "2026-04-01",
   "compatibility_flags": ["nodejs_compat"],
 
+  "rules": [
+    { "type": "Text", "globs": ["**/*.md"], "fallthrough": true }
+  ],
+
   "assets": {
     "directory": "./dist/client",
     "binding": "ASSETS",
@@ -15,7 +19,7 @@
     {
       "binding": "DB",
       "database_name": "visit_signin",
-      "database_id": "REPLACE_WITH_D1_ID",
+      "database_id": "28a37592-0ba3-4dd2-9cb2-1ebfab7496da",
       "migrations_dir": "src/worker/migrations"
     }
   ],
@@ -30,7 +34,7 @@
   "kv_namespaces": [
     {
       "binding": "KV",
-      "id": "REPLACE_WITH_KV_ID"
+      "id": "c1f3f323b07e41fa90e000982e754209"
     }
   ],
 
