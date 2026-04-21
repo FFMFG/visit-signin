@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+.dev.vars.local
+.env
+.env.local
+*.log
+.DS_Store
+coverage/
+.vscode/
+.idea/

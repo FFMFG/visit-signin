@@ -1,0 +1,52 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "visit-signin",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "visit_signin",
+      "database_id": "REPLACE_WITH_D1_ID",
+      "migrations_dir": "src/worker/migrations"
+    }
+  ],
+
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "visit-signin-artifacts"
+    }
+  ],
+
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "REPLACE_WITH_KV_ID"
+    }
+  ],
+
+  "triggers": {
+    "crons": ["7 0 * * *"]
+  },
+
+  "vars": {
+    "TIMEZONE": "America/Denver",
+    "AUTO_SIGNOUT_HOUR_LOCAL": "18",
+    "FRONT_DESK_CHANNEL": "#front-desk",
+    "COMPLIANCE_CHANNEL": "#compliance",
+    "ERROR_CHANNEL": "#visitor-app-errors"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
